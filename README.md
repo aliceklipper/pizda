@@ -25,3 +25,4 @@
  *  Wait for Prepack release.
  *  Fix `eslint-plugin-import` errors.
  *  Write EditorConfig.
+ *  Configure offline plugin to update caches.
