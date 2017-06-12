@@ -1,4 +1,11 @@
-/* eslint no-magic-numbers: 'off' */
+/*
+ eslint
+ no-magic-numbers: off,
+ import/no-extraneous-dependencies: off,
+ import/no-commonjs: off,
+ import/unambiguous: off,
+ fp/no-mutation: off
+ */
 
 /* Import builtin modules */
 const { join } = require('path');
@@ -11,10 +18,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const BabiliPlugin = require('babili-webpack-plugin');
 
+/* Import other helpers */
+const { dev } = require('alice-helpers');
+
 /* Define shortcuts for some webpack plugins */
 const { DefinePlugin, NamedModulesPlugin, NoEmitOnErrorsPlugin } = webpack;
-
-const { dev } = require('alice-helpers');
 
 /*
  * Config options
@@ -70,6 +78,9 @@ const node = () => ({
 /* Resolving configurations */
 const resolve = () => ({
     extensions: ['.jsx', '.js', '.json'],
+    alias: {
+        '~': join(process.cwd(), 'src'),
+    },
 });
 
 /*

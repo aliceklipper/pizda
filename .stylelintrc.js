@@ -1,4 +1,10 @@
-/* eslint no-magic-numbers: 'off' */
+/*
+ eslint
+ no-magic-numbers: off,
+ import/no-commonjs: off,
+ import/unambiguous: off,
+ fp/no-mutation: off
+ */
 
 module.exports = {
     processors: ['stylelint-processor-styled-components'],

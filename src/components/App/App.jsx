@@ -1,18 +1,14 @@
-const THRESHOLD = 0.5;
+import styled from 'styled-components';
+
+const Div = styled.div`
+    color: #0080ff;
+`;
 
 function App() {
     return (
-        <div className={'App'}>
-            {
-                do {
-                    if (Math.random() > THRESHOLD) {
-                        ('Govno');
-                    } else {
-                        ('Pizda');
-                    }
-                }
-            }
-        </div>
+        <Div className={'App'}>
+            Pizda
+        </Div>
     );
 }
 
