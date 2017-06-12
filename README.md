@@ -8,7 +8,6 @@
  *  Configure Jest.
  *  Configure Git hooks.
  *  Configure HMR.
- *  Configure root import in webpack.
  *  Configure Flow stub for GraphQL files.
  *  Show notifications on successful/failed build.
  *  Maintain Prerender SPA Plugin:
@@ -25,3 +24,4 @@
  *  Add Prerender-specific options to the `page.pug`.
  *  Wait for Prepack release.
  *  Fix `eslint-plugin-import` errors.
+ *  Write EditorConfig.
