@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# Runs tests
+
+export NODE_ENV='production'
+export PORT=1337
+export PUBLIC_PATH='/'
+
+lint && jest --coverage

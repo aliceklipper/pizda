@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Runs type-checking
+
+# TODO: Configure type-checking
+
+echo "Type-checking currently unimplemented."

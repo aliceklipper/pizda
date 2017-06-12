@@ -1,0 +1,17 @@
+[ignore]
+# <PROJECT_ROOT>/node_modules/.*
+# <PROJECT_ROOT>/build/.*
+# <PROJECT_ROOT>/webpack\.config\.js
+# <PROJECT_ROOT>/\.eslintrc\.js
+# <PROJECT_ROOT>/\.stylelint\.js
+
+[include]
+
+#
+
+[libs]
+
+[options]
+all=true
+emoji=true
+# module.name_mapper.extension='less' -> '<PROJECT_ROOT>/less-stub.js'

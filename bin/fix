@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Runs ESLint and fixes it's errors if possible.
+
+# TODO: Can stylelint fix errors?
+
+eslint --fix .

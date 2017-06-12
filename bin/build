@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+export NODE_ENV='production'
+export PORT=1337
+export PUBLIC_PATH='/'
+
+webpack
+

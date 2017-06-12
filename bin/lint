@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Runs linters
+
+# TODO: Configure stylelint.
+
+eslint .

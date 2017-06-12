@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# Creates functional component.
+
+INDEX="export * from './${2}';\n\
+export { default } from './${2}';"
+
+MAIN="function ${2}() {
+    return (
+        <div className={'${2}'}>
+            {/* TODO: ${2} stub. */}
+        </div>
+    );
+}
+
+export default ${2};"
+
+mkdir -p "./src/${1}/${2}/"
+
+echo -e "${INDEX}" > "./src/${1}/${2}/index.jsx"
+echo -e "${MAIN}" > "./src/${1}/${2}/${2}.jsx"
+
+git add "./src/${1}/${2}/*"
+

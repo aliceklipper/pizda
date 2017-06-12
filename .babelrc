@@ -1,0 +1,32 @@
+{
+    "presets": [
+        [
+            "env",
+            {
+                "useBuiltIns": true
+            }
+        ],
+        "react-optimize",
+        "react",
+        "stage-0"
+    ],
+    "plugins": [
+        "macros",
+        "overload",
+        "flow-runtime",
+        "partial-application",
+        "idx",
+        "contracts",
+        "trace",
+        "ramda",
+        "relay",
+        "react-require"
+    ],
+    "env": {
+        "production": {
+            "plugins": [
+                "groundskeeper-willie"
+            ]
+        }
+    }
+}
