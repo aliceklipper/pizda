@@ -1,7 +1,17 @@
+const THRESHOLD = 0.5;
+
 function App() {
     return (
         <div className={'App'}>
-            Pizda
+            {
+                do {
+                    if (Math.random() > THRESHOLD) {
+                        ('Govno');
+                    } else {
+                        ('Pizda');
+                    }
+                }
+            }
         </div>
     );
 }

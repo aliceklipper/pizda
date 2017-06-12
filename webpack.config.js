@@ -125,6 +125,13 @@ const jsRule = () => ({
             loader: 'babel-loader',
             options: { cacheDirectory: true },
         },
+        {
+            loader: 'eslint-loader',
+            options: {
+                emitError: true,
+                fix: true,
+            },
+        },
     ].filter(Boolean),
 });
 

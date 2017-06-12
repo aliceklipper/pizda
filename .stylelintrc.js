@@ -1,3 +1,5 @@
+/* eslint no-magic-numbers: 'off' */
+
 module.exports = {
     processors: ['stylelint-processor-styled-components'],
     extends: 'stylelint-config-standard',

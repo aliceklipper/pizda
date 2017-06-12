@@ -2,11 +2,24 @@
 
 module.exports = {
     parser: 'babel-eslint',
+    parserOptions: {
+        ecmaVersion: 8,
+        sourceType: 'module',
+        codeFrame: true,
+        ecmaFeature: {
+            impliedStrict: true,
+            jsx: true,
+            experimentalObjectRestSpread: true,
+        },
+    },
     env: {
         browser: true,
         commonjs: true,
         es6: true,
         node: true,
+        worker: true,
+        serviceworker: true,
+        webextensions: true,
     },
     globals: {
         _: true,
@@ -178,7 +191,6 @@ module.exports = {
                 trailingComma: 'all',
                 bracketSpacing: true,
                 jsxBracketSameLine: false,
-                parser: 'flow',
                 semi: true,
             },
         ],

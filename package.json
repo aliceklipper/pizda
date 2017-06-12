@@ -46,6 +46,7 @@
         "eslint": "^3.19.0",
         "eslint-config-google": "^0.8.0",
         "eslint-config-prettier": "^2.1.1",
+        "eslint-loader": "^1.7.1",
         "eslint-plugin-babel": "^4.1.1",
         "eslint-plugin-flowtype": "^2.34.0",
         "eslint-plugin-graphql": "^1.0.0",
@@ -64,7 +65,7 @@
         "stylelint-config-standard": "^16.0.0",
         "stylelint-processor-styled-components": "^0.1.0",
         "url-loader": "^0.5.8",
-        "webpack": "^2.6.1",
+        "webpack": "3.0.0-rc.1",
         "webpack-dev-server": "^2.4.5"
     },
     "dependencies": {
