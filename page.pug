@@ -20,10 +20,13 @@ html(lang= 'en', manifest= htmlWebpackPlugin.files.manifest ? htmlWebpackPlugin.
         title= htmlWebpackPlugin.options.title || 'Webpack App'
 
         if htmlWebpackPlugin.files.favicon
+            //- TODO: Replace this shit with something that works in all cases.
             link(rel='shortcut icon', href= '/build/' + htmlWebpackPlugin.files.favicon)/
 
         if htmlWebpackPlugin.options.mobile
             meta(name= 'viewport', content= 'width=device-width, initial-scale=1')/
+
+        // TODO: Add options for Google Fonts.
 
         each item in htmlWebpackPlugin.options.links
             - if (typeof item === 'string' || item instanceof String) { item = { href: item }; }
@@ -79,3 +82,5 @@ html(lang= 'en', manifest= htmlWebpackPlugin.files.manifest ? htmlWebpackPlugin.
                 if htmlWebpackPlugin.options.googleAnalytics.pageViewOnLoad
                     | ga('send', 'pageview');
             script(type= 'text/javascript', async= '', defer= '', src= 'https://www.google-analytics.com/analytics.js')
+
+        //- TODO: Add an option for Yandex.Metrica
