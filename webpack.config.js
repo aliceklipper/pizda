@@ -12,7 +12,7 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const BabiliPlugin = require('babili-webpack-plugin');
 
 /* Define shortcuts for some webpack plugins */
-const { DefinePlugin, HotModuleReplacementPlugin, NamedModulesPlugin, NoEmitOnErrorsPlugin } = webpack;
+const { DefinePlugin, NamedModulesPlugin, NoEmitOnErrorsPlugin } = webpack;
 
 const { dev } = require('alice-helpers');
 
@@ -28,7 +28,7 @@ const context = () => process.cwd();
 
 /* Entry point configuration */
 const entry = () => ({
-    index: ['babel-polyfill', dev() && 'react-hot-loader/patch', './src/index.jsx'].filter(Boolean),
+    index: ['babel-polyfill', './src/index.jsx'].filter(Boolean),
 });
 
 /* Output configuration */
@@ -37,7 +37,7 @@ const output = () => ({
     filename: '[name].js',
     path: join(process.cwd(), 'build'),
     pathinfo: dev(),
-    publicPath: process.env.PUBLIC_PATH,
+    publicPath: `http://localhost:${process.env.PORT}/${process.env.PUBLIC_PATH}`,
 });
 
 /* Source maps configuration */
@@ -51,7 +51,7 @@ const devServer = () => ({
     publicPath: process.env.PUBLIC_PATH,
     contentBase: join(process.cwd(), 'build'),
     watchContentBase: true,
-    hot: true,
+    hot: false,
 });
 
 /* Watch configuration */
@@ -97,11 +97,9 @@ const namedPlugin = () => (dev() ? new NamedModulesPlugin() : null);
 
 const errorsPlugin = () => (dev() ? new NoEmitOnErrorsPlugin() : null);
 
-const hmrPlugin = () => (dev() ? new HotModuleReplacementPlugin() : null);
-
 const babiliPlugin = () => (dev() ? null : new BabiliPlugin());
 
-const compressionPlugin = () => new CompressionPlugin();
+const compressionPlugin = () => (dev() ? null : new CompressionPlugin());
 
 /*
  * Rules
@@ -145,7 +143,7 @@ module.exports = [
         watch: watch(),
         node: node(),
         resolve: resolve(),
-        plugins: [envPlugin(), htmlPlugin(), namedPlugin(), errorsPlugin(), hmrPlugin(), babiliPlugin(), compressionPlugin()].filter(Boolean),
+        plugins: [envPlugin(), htmlPlugin(), namedPlugin(), errorsPlugin(), babiliPlugin(), compressionPlugin()].filter(Boolean),
         module: { rules: [jsonRule(), fileRule(), jsRule()] },
     },
 ].filter(Boolean);

@@ -8,6 +8,9 @@ module.exports = {
         es6: true,
         node: true,
     },
+    globals: {
+        _: true,
+    },
     extends: [
         'eslint:recommended',
         'google',
@@ -62,9 +65,9 @@ module.exports = {
         'no-new-func': 'error',
         'no-script-url': 'error',
         'no-self-compare': 'error',
-        'no-sequences': 'error',
+        'no-sequences': 'off',
         'no-unmodified-loop-condition': 'error',
-        'no-unused-expressions': 'error',
+        'no-unused-expressions': 'off',
         'no-useless-call': 'error',
         'no-useless-concat': 'error',
         yoda: 'error',
@@ -169,7 +172,7 @@ module.exports = {
             'error',
             {
                 useTabs: false,
-                printWidth: 160,
+                printWidth: 140,
                 tabWidth: 4,
                 singleQuote: true,
                 trailingComma: 'all',
@@ -188,5 +191,6 @@ module.exports = {
         //     }],
 
         'require-jsdoc': 'off',
+        'no-unused-labels': 'off',
     },
 };

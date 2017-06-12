@@ -1,7 +1,9 @@
-import { AppContainer } from 'react-hot-loader';
+import ReactDOM from 'react-dom';
+
+import App from './components/App';
 
 async function main() {
-    console.log('Hello!');
+    ReactDOM.render(<App />, document.querySelector('#mount'));
 }
 
 main();

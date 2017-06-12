@@ -11,13 +11,10 @@
         "stage-0"
     ],
     "plugins": [
-        "macros",
-        "overload",
+        "trace",
         "flow-runtime",
         "partial-application",
         "idx",
-        "contracts",
-        "trace",
         "ramda",
         "relay",
         "react-require"
