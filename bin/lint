@@ -4,4 +4,6 @@
 
 # TODO: Configure stylelint.
 
-eslint .
+shopt -s globstar
+
+eslint . ./src/**/*
