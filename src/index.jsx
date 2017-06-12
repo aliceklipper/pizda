@@ -1,9 +1,10 @@
 import ReactDOM from 'react-dom';
+import offline from 'offline-plugin/runtime';
 
 import App from './components/App';
 
-async function main() {
-    ReactDOM.render(<App />, document.querySelector('#mount'));
-}
+(async () => {
+    offline.install();
 
-main();
+    ReactDOM.render(<App />, document.querySelector('#mount'));
+})();

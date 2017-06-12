@@ -43,8 +43,8 @@ module.exports = {
         'prettier',
         'prettier/flowtype',
         'prettier/react',
-        'plugin:import/errors',
-        'plugin:import/stage-0',
+        // 'plugin:import/errors',
+        // 'plugin:import/stage-0',
         'plugin:promise/recommended',
     ],
     plugins: [
@@ -164,7 +164,7 @@ module.exports = {
                 defaultAssignment: false,
             },
         ],
-        'operator-assignment': ERROR,
+        'operator-assignment': [ERROR, 'never'], // All hail Immutability!
 
         'no-useless-computed-key': ERROR,
         'no-useless-constructor': ERROR,
@@ -202,35 +202,36 @@ module.exports = {
         'flowtype/no-types-missing-file-annotation': OFF,
 
         // TODO: Configure `import/no-restricted-paths` rule for projects, which contains both client and server code.
-        'import/no-absolute-path': ERROR,
-        'import/no-dynamic-require': ERROR,
-        'import/no-named-as-default-member': ERROR,
-        'import/no-extraneous-dependencies': [
-            ERROR,
-            {
-                devDependencies: false,
-                optionalDependencies: false,
-                peerDependencies: false,
-            },
-        ],
-        'import/no-mutable-exports': ERROR,
-        'import/unambiguous': ERROR,
-        'import/no-commonjs': ERROR,
-        'import/no-amd': ERROR,
-        'import/first': ERROR,
-        'import/no-duplicates': ERROR,
-        'import/no-namespace': ERROR,
-        'import/order': [
-            ERROR,
-            {
-                'newlines-between': 'always-and-inside-groups',
-            },
-        ],
-        'import/newline-after-import': ERROR,
-        'import/prefer-default-export': ERROR,
-        'import/max-dependencies': ERROR,
-        'import/no-unassigned-import': ERROR,
-        'import/no-named-default': ERROR,
+        // 'import/no-absolute-path': ERROR,
+        // 'import/no-dynamic-require': ERROR,
+        // 'import/no-named-as-default-member': ERROR,
+        // 'import/no-extraneous-dependencies': [
+        //     ERROR,
+        //     {
+        //         devDependencies: false,
+        //         optionalDependencies: false,
+        //         peerDependencies: false,
+        //     },
+        // ],
+        // 'import/no-mutable-exports': ERROR,
+        // 'import/unambiguous': ERROR,
+        // 'import/no-commonjs': ERROR,
+        // 'import/no-amd': ERROR,
+        // 'import/first': ERROR,
+        // 'import/no-duplicates': ERROR,
+        // 'import/no-namespace': ERROR,
+        // 'import/order': [
+        //     ERROR,
+        //     {
+        //         'newlines-between': 'always-and-inside-groups',
+        //     },
+        // ],
+        // 'import/newline-after-import': ERROR,
+        // 'import/prefer-default-export': ERROR,
+        // 'import/max-dependencies': ERROR,
+        // 'import/no-unassigned-import': ERROR,
+        // 'import/no-named-default': ERROR,
+        // 'import/no-deprecated': ERROR,
 
         'no-param-reassign': ERROR,
         'fp/no-let': ERROR,
@@ -316,5 +317,6 @@ module.exports = {
                 'config-index': 0,
             },
         },
+        'import/extensions': ['.js', '.jsx', '.json'],
     },
 };

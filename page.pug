@@ -4,6 +4,10 @@
 - htmlWebpackPlugin.options.meta        = normalize(htmlWebpackPlugin.options.meta);
 - scripts                               = normalize(htmlWebpackPlugin.options.scripts);
 
+//- const util = require('util');
+//- util.inspect.defaultOptions.depth = 7
+//- console.log(htmlWebpackPlugin);
+
 doctype html
 
 html(lang= 'en', manifest= htmlWebpackPlugin.files.manifest ? htmlWebpackPlugin.files.manifest : undefined)
@@ -26,7 +30,7 @@ html(lang= 'en', manifest= htmlWebpackPlugin.files.manifest ? htmlWebpackPlugin.
         if htmlWebpackPlugin.options.mobile
             meta(name= 'viewport', content= 'width=device-width, initial-scale=1')/
 
-        // TODO: Add options for Google Fonts.
+        //- TODO: Add options for Google Fonts.
 
         each item in htmlWebpackPlugin.options.links
             - if (typeof item === 'string' || item instanceof String) { item = { href: item }; }

@@ -17,6 +17,9 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const BabiliPlugin = require('babili-webpack-plugin');
+const OfflinePlugin = require('offline-plugin');
+const PrerenderSpaPlugin = require('prerender-spa-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 /* Import other helpers */
 const { dev } = require('alice-helpers');
@@ -36,7 +39,7 @@ const context = () => process.cwd();
 
 /* Entry point configuration */
 const entry = () => ({
-    index: ['babel-polyfill', './src/index.jsx'].filter(Boolean),
+    index: ['babel-polyfill', './src/index.jsx'],
 });
 
 /* Output configuration */
@@ -45,7 +48,7 @@ const output = () => ({
     filename: '[name].js',
     path: join(process.cwd(), 'build'),
     pathinfo: dev(),
-    publicPath: `http://localhost:${process.env.PORT}/${process.env.PUBLIC_PATH}`,
+    publicPath: process.env.PUBLIC_PATH,
 });
 
 /* Source maps configuration */
@@ -53,8 +56,9 @@ const devtool = () => (dev() ? 'source-map' : undefined);
 
 /* Development server configuration */
 const devServer = () => ({
-    compress: true,
-    port: 1337,
+    compress: false,
+    port: process.env.PORT,
+    host: process.env.HOST,
     historyApiFallback: true,
     publicPath: process.env.PUBLIC_PATH,
     contentBase: join(process.cwd(), 'build'),
@@ -63,7 +67,7 @@ const devServer = () => ({
 });
 
 /* Watch configuration */
-const watch = () => dev();
+const watch = () => false;
 
 /* Node-like environment configuration */
 const node = () => ({
@@ -111,6 +115,23 @@ const errorsPlugin = () => (dev() ? new NoEmitOnErrorsPlugin() : null);
 const babiliPlugin = () => (dev() ? null : new BabiliPlugin());
 
 const compressionPlugin = () => (dev() ? null : new CompressionPlugin());
+
+const offlinePlugin = () =>
+    new OfflinePlugin({
+        ServiceWorker: {
+            navigateFallbackURL: '/',
+        },
+    });
+
+const prerenderPlugin = () => (dev() ? null : new PrerenderSpaPlugin(join(process.cwd(), 'build'), ['/']));
+
+const analyzerPlugin = () =>
+    dev()
+        ? new BundleAnalyzerPlugin()
+        : new BundleAnalyzerPlugin({
+              analyzerMode: 'static',
+              defaultSizes: 'gzip',
+          });
 
 /*
  * Rules
@@ -161,7 +182,17 @@ module.exports = [
         watch: watch(),
         node: node(),
         resolve: resolve(),
-        plugins: [envPlugin(), htmlPlugin(), namedPlugin(), errorsPlugin(), babiliPlugin(), compressionPlugin()].filter(Boolean),
+        plugins: [
+            envPlugin(),
+            htmlPlugin(),
+            namedPlugin(),
+            errorsPlugin(),
+            babiliPlugin(),
+            compressionPlugin(),
+            offlinePlugin(),
+            prerenderPlugin(),
+            analyzerPlugin(),
+        ].filter(Boolean),
         module: { rules: [jsonRule(), fileRule(), jsRule()] },
     },
 ].filter(Boolean);

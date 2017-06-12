@@ -1,2 +1,5 @@
-> 5%
-Last 2 versions
+[production]
+last 2 versions
+
+[development]
+chrome >= 59
