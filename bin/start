@@ -7,4 +7,6 @@ export PORT=1337
 export PUBLIC_PATH=''
 export HOST='localhost'
 
+echo -en "\033]0;wds\a"
+
 webpack-dev-server

@@ -5,4 +5,6 @@ export PORT=1337
 export PUBLIC_PATH=''
 export HOST='aliceklipper.github.io'
 
+echo -en "\033]0;build\a"
+
 webpack
