@@ -9,7 +9,6 @@
  *  Configure Git hooks.
  *  Configure HMR.
  *  Configure Flow stub for GraphQL files.
- *  Show notifications on successful/failed build.
  *  Maintain Prerender SPA Plugin:
      *  Fix bugs.
      *  Send PR.
@@ -23,6 +22,21 @@
  *  Configure Flow support in ESLint.
  *  Add Prerender-specific options to the `page.pug`.
  *  Wait for Prepack release.
- *  Fix `eslint-plugin-import` errors.
  *  Write EditorConfig.
  *  Configure offline plugin to update caches.
+     *  Or even write my own SW.
+ *  Add application manifest.
+ *  Add mobile-specific `meta` tags.
+ *  Create cool name? Rocket Broom?
+ *  Create logo.
+ *  Show logo in build notifications.
+ *  Add `progress-bar-webpack-plugin`.
+ *  Any window titles convention for scripts?
+ *  Move project to KlipperSubs organization.
+ *  Load add name from `package.json`.
+ *  Write version and build number injector plugin.
+ *  Configure stylelint.
+ *  Add progress bar.
+ *  Stylelint loader for webpack?
+ *  ESLint stylelint plugin?
+ *  Print some messages in bash scripts.
