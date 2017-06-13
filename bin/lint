@@ -2,8 +2,4 @@
 
 # Runs linters
 
-# TODO: Configure stylelint.
-
-shopt -s globstar
-
-eslint . ./src/**/*
+eslint "." "./src/**/*.{js,jsx}" && stylelint "./src/**/*.{js,jsx}"
