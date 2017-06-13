@@ -17,9 +17,10 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const BabiliPlugin = require('babili-webpack-plugin');
-const OfflinePlugin = require('offline-plugin');
+// const OfflinePlugin = require('offline-plugin');
 const PrerenderSpaPlugin = require('prerender-spa-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const NotifierPlugin = require('webpack-notifier');
 
 /* Import other helpers */
 const { dev } = require('alice-helpers');
@@ -64,6 +65,8 @@ const devServer = () => ({
     contentBase: join(process.cwd(), 'build'),
     watchContentBase: true,
     hot: false,
+    clientLogLevel: 'none',
+    noInfo: true,
 });
 
 /* Watch configuration */
@@ -116,22 +119,33 @@ const babiliPlugin = () => (dev() ? null : new BabiliPlugin());
 
 const compressionPlugin = () => (dev() ? null : new CompressionPlugin());
 
-const offlinePlugin = () =>
-    new OfflinePlugin({
-        ServiceWorker: {
-            navigateFallbackURL: '/',
-        },
-    });
+// const offlinePlugin = () =>
+//     new OfflinePlugin({
+//         ServiceWorker: {
+//             navigateFallbackURL: '/',
+//             responseStrategy: 'network-first',
+//             updateStrategy: 'all',
+//             version: '[hash]',
+//         },
+//     });
 
 const prerenderPlugin = () => (dev() ? null : new PrerenderSpaPlugin(join(process.cwd(), 'build'), ['/']));
 
 const analyzerPlugin = () =>
     dev()
-        ? new BundleAnalyzerPlugin()
+        ? new BundleAnalyzerPlugin({
+              openAnalyzer: false,
+          })
         : new BundleAnalyzerPlugin({
               analyzerMode: 'static',
               defaultSizes: 'gzip',
+              openAnalyzer: false,
           });
+
+const notifierPlugin = () =>
+    new NotifierPlugin({
+        alwaysNotify: true,
+    });
 
 /*
  * Rules
@@ -189,9 +203,10 @@ module.exports = [
             errorsPlugin(),
             babiliPlugin(),
             compressionPlugin(),
-            offlinePlugin(),
+            // offlinePlugin(),
             prerenderPlugin(),
             analyzerPlugin(),
+            notifierPlugin(),
         ].filter(Boolean),
         module: { rules: [jsonRule(), fileRule(), jsRule()] },
     },
