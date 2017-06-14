@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Div = styled.div`
-    color: #0080ff;
+    color: #ff8000;
 `;
 
 function App() {
