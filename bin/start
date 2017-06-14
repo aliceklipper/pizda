@@ -7,6 +7,8 @@ export PORT=1337
 export PUBLIC_PATH=''
 export HOST='localhost'
 
-echo -en "\033]0;wds\a"
+export NODE_OPTIONS="--no-deprecation"
 
-webpack-dev-server
+echo -en "\033]0;RocketBroom » WDS « ${NODE_ENV}\a"
+
+node --harmony `which webpack-dev-server`

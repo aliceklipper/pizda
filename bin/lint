@@ -2,4 +2,9 @@
 
 # Runs linters
 
-eslint "." "./src/**/*.{js,jsx}" && stylelint "./src/**/*.{js,jsx}"
+# FIXME: OH, NO, `stylelint --fix` on JS files breaks all.
+# TODO: Definitely, we need `eslint-stylelint-plugin`. Also, with it stylelint for styled-components may be seamlessly integrated into IDEA.
+
+echo -en "\033]0;RocketBroom » Lint\a"
+
+eslint --fix "." "./src/**/*.{js,jsx}" && stylelint "./src/**/*.{js,jsx}"
