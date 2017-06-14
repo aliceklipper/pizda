@@ -80,6 +80,7 @@
         "url-loader": "^0.5.8",
         "webpack": "3.0.0-rc.1",
         "webpack-bundle-analyzer": "^2.8.2",
+        "webpack-dashboard": "^0.4.0",
         "webpack-dev-server": "^2.4.5",
         "webpack-notifier": "^1.5.0"
     },

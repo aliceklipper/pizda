@@ -2,8 +2,11 @@
 
 # Adds NodeJS- and project-related paths to the PATH.
 
-# TODO: Configure VIRTUAL_ENV prefix
+# TODO: Configure prompt prefix
+# TODO: Configure NODE_PATH
+# TODO: Fix an issue with ^R.
+
+export ENV_NAME="RocketBroom"
 
 export PATH="${PWD}/bin:${PWD}/node_modules/.bin:${PATH}"
-
-echo -en "\033]0;RocketBroom » Shell\a"
+export PS1="$(echo -en "\033]0;${ENV_NAME} » Shell\a")$(build_prompt) "

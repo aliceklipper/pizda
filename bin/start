@@ -9,6 +9,10 @@ export HOST='localhost'
 
 export NODE_OPTIONS="--no-deprecation"
 
-echo -en "\033]0;RocketBroom » WDS « ${NODE_ENV}\a"
-
-node --harmony `which webpack-dev-server`
+webpack-dashboard \
+    --port "$[PORT + 1]" \
+    --title "RocketBroom » WDS « ${NODE_ENV}" \
+    -- \
+    node \
+    --harmony \
+    `which webpack-dev-server`

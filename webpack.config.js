@@ -25,11 +25,12 @@ const BabiliPlugin = require('babili-webpack-plugin');
 const PrerenderSpaPlugin = require('prerender-spa-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const NotifierPlugin = require('webpack-notifier');
-const ProgressPlugin = require('progress-bar-webpack-plugin');
+// const ProgressPlugin = require('progress-bar-webpack-plugin');
+const DashboardPlugin = require('webpack-dashboard/plugin');
 
 /* Import other helpers */
-const R = require('ramda');
-const chalk = require('chalk');
+// const R = require('ramda');
+// const chalk = require('chalk');
 const { dev } = require('alice-helpers');
 
 /* Define shortcuts for some webpack plugins */
@@ -39,119 +40,119 @@ const { DefinePlugin, NamedModulesPlugin, NoEmitOnErrorsPlugin } = webpack;
  * Some preparations
  */
 
-const restore = (() => {
-    const log = console.log.bind(console);
+// const restore = (() => {
+//     const log = console.log.bind(console);
+//
+//     const buffer = [];
+//
+//     console.log = (...args) => buffer.push(args); // eslint-disable-line fp/no-mutating-methods
+//
+//     return () => {
+//         log();
+//         buffer.forEach(item => log(...item));
+//         console.log = log;
+//     };
+// })();
 
-    const buffer = [];
-
-    console.log = (...args) => buffer.push(args); // eslint-disable-line fp/no-mutating-methods
-
-    return () => {
-        log();
-        buffer.forEach(item => log(...item));
-        console.log = log;
-    };
-})();
-
-function backgroundColor(color) {
-    return `bg${color[0].toUpperCase()}${color.substring(1)}`;
-}
-
-function powerlineSymbol(symbol) {
-    switch (symbol) {
-        case '}':
-            return '\uE0B0';
-        case '{':
-            return '\uE0B2';
-        default:
-            return symbol;
-    }
-}
-
-function powerlineForeground(options) {
-    if (options.foreground) {
-        return {
-            ...options,
-            message: chalk[options.foreground](options.message),
-        };
-    } else {
-        return options;
-    }
-}
-
-function powerlineBackground(options) {
-    if (options.background) {
-        return {
-            ...options,
-            message: chalk[backgroundColor(options.background)](options.message),
-        };
-    } else {
-        return options;
-    }
-}
-
-function powerlinePadding(options) {
-    if (options.padding) {
-        return {
-            ...options,
-            message: [
-                powerlineBackground({ message: ' ', background: options.background }).message, // Paint left padding with background color.
-                options.message,
-                powerlineBackground({ message: ' ', background: options.background }).message, // Paint right padding with background color.
-            ].join(''),
-        };
-    } else {
-        return options;
-    }
-}
-
-function powerlineNext(options) {
-    if (!options.end) {
-        return options;
-    } else if (options.end === ' ') {
-        return {
-            ...options,
-            message: [options.message, powerlineBackground({ ...options, message: ' ' }).message].join(''),
-        };
-    } else {
-        return {
-            ...options,
-            message: [
-                options.message,
-                powerlineForeground({
-                    ...powerlineBackground({ message: powerlineSymbol(options.end), background: options.next }),
-                    foreground: options.background,
-                }).message,
-            ].join(''),
-        };
-    }
-}
-
-function powerlinePrevious(options) {
-    if (!options.start) {
-        return options;
-    } else if (options.start === ' ') {
-        return {
-            ...options,
-            message: [powerlineBackground({ ...options, message: ' ' }).message, options.message].join(''),
-        };
-    } else {
-        return {
-            ...options,
-            message: [
-                powerlineForeground({
-                    ...powerlineBackground({ message: powerlineSymbol(options.start), background: options.previous }),
-                    foreground: options.background,
-                }).message,
-                options.message,
-            ].join(''),
-        };
-    }
-}
-
-function powerline(options) {
-    return R.compose(powerlinePrevious, powerlineNext, powerlineBackground, powerlineForeground, powerlinePadding)(options).message;
-}
+// function backgroundColor(color) {
+//     return `bg${color[0].toUpperCase()}${color.substring(1)}`;
+// }
+//
+// function powerlineSymbol(symbol) {
+//     switch (symbol) {
+//         case '}':
+//             return '\uE0B0';
+//         case '{':
+//             return '\uE0B2';
+//         default:
+//             return symbol;
+//     }
+// }
+//
+// function powerlineForeground(options) {
+//     if (options.foreground) {
+//         return {
+//             ...options,
+//             message: chalk[options.foreground](options.message),
+//         };
+//     } else {
+//         return options;
+//     }
+// }
+//
+// function powerlineBackground(options) {
+//     if (options.background) {
+//         return {
+//             ...options,
+//             message: chalk[backgroundColor(options.background)](options.message),
+//         };
+//     } else {
+//         return options;
+//     }
+// }
+//
+// function powerlinePadding(options) {
+//     if (options.padding) {
+//         return {
+//             ...options,
+//             message: [
+//                 powerlineBackground({ message: ' ', background: options.background }).message, // Paint left padding with background color.
+//                 options.message,
+//                 powerlineBackground({ message: ' ', background: options.background }).message, // Paint right padding with background color.
+//             ].join(''),
+//         };
+//     } else {
+//         return options;
+//     }
+// }
+//
+// function powerlineNext(options) {
+//     if (!options.end) {
+//         return options;
+//     } else if (options.end === ' ') {
+//         return {
+//             ...options,
+//             message: [options.message, powerlineBackground({ ...options, message: ' ' }).message].join(''),
+//         };
+//     } else {
+//         return {
+//             ...options,
+//             message: [
+//                 options.message,
+//                 powerlineForeground({
+//                     ...powerlineBackground({ message: powerlineSymbol(options.end), background: options.next }),
+//                     foreground: options.background,
+//                 }).message,
+//             ].join(''),
+//         };
+//     }
+// }
+//
+// function powerlinePrevious(options) {
+//     if (!options.start) {
+//         return options;
+//     } else if (options.start === ' ') {
+//         return {
+//             ...options,
+//             message: [powerlineBackground({ ...options, message: ' ' }).message, options.message].join(''),
+//         };
+//     } else {
+//         return {
+//             ...options,
+//             message: [
+//                 powerlineForeground({
+//                     ...powerlineBackground({ message: powerlineSymbol(options.start), background: options.previous }),
+//                     foreground: options.background,
+//                 }).message,
+//                 options.message,
+//             ].join(''),
+//         };
+//     }
+// }
+//
+// function powerline(options) {
+//     return R.compose(powerlinePrevious, powerlineNext, powerlineBackground, powerlineForeground, powerlinePadding)(options).message;
+// }
 
 /*
  * Config options
@@ -269,29 +270,31 @@ const notifierPlugin = () =>
         title: 'webpack',
     });
 
-const progressPlugin = () =>
-    new ProgressPlugin({
-        callback: restore,
-        width: process.stdout.columns + 100,
-        complete: chalk.bgCyan(' '),
-        format: [
-            powerline({ message: 'RocketBroom', padding: true, foreground: 'black', background: 'green', next: 'cyan', end: '}' }),
-            powerline({
-                message: dev() ? 'WDS' : 'webpack',
-                padding: true,
-                foreground: 'black',
-                background: 'cyan',
-                next: 'blue',
-                end: '}',
-            }),
-            powerline({ message: process.env.NODE_ENV, padding: true, foreground: 'black', background: 'blue', end: '}' }),
-            powerline({ message: ':percent', padding: true }),
-            chalk.cyan(powerlineSymbol('{')),
-            ':bar',
-            chalk.cyan(powerlineSymbol('}')),
-        ].join(''),
-        clear: false,
-    });
+// const progressPlugin = () =>
+//     new ProgressPlugin({
+//         callback: restore,
+//         width: process.stdout.columns + 100,
+//         complete: chalk.bgCyan(' '),
+//         format: [
+//             powerline({ message: 'RocketBroom', padding: true, foreground: 'black', background: 'green', next: 'cyan', end: '}' }),
+//             powerline({
+//                 message: dev() ? 'WDS' : 'webpack',
+//                 padding: true,
+//                 foreground: 'black',
+//                 background: 'cyan',
+//                 next: 'blue',
+//                 end: '}',
+//             }),
+//             powerline({ message: process.env.NODE_ENV, padding: true, foreground: 'black', background: 'blue', end: '}' }),
+//             powerline({ message: ':percent', padding: true }),
+//             chalk.cyan(powerlineSymbol('{')),
+//             ':bar',
+//             chalk.cyan(powerlineSymbol('}')),
+//         ].join(''),
+//         clear: false,
+//     });
+
+const dashboardPlugin = () => new DashboardPlugin({ port: parseInt(process.env.PORT) + 1 });
 
 /*
  * Rules
@@ -353,7 +356,8 @@ module.exports = [
             prerenderPlugin(),
             analyzerPlugin(),
             notifierPlugin(),
-            progressPlugin(),
+            // progressPlugin(),
+            dashboardPlugin(),
         ].filter(Boolean),
         module: { rules: [jsonRule(), fileRule(), jsRule()] },
     },
