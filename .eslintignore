@@ -3,5 +3,6 @@ flow-typed/
 node_modules/
 test/
 var/
+coverage/
 !.eslintrc.js
 !.stylelintrc.js
