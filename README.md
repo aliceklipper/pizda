@@ -27,16 +27,21 @@
      *  Or even write my own SW.
  *  Add application manifest.
  *  Add mobile-specific `meta` tags.
- *  Create cool name? Rocket Broom?
  *  Create logo.
  *  Show logo in build notifications.
- *  Add `progress-bar-webpack-plugin`.
  *  Any window titles convention for scripts?
+     >  Maybe: `"RocketBroom » ${TASK_NAME} « ${NODE_ENV}"`.
  *  Move project to KlipperSubs organization.
  *  Load add name from `package.json`.
  *  Write version and build number injector plugin.
+     >  Like `DefinePlugin`, but with dynamically computed values.
+ *  Write `dynamic-define-plugin`.
  *  Configure stylelint.
- *  Add progress bar.
  *  Stylelint loader for webpack?
  *  ESLint stylelint plugin?
- *  Print some messages in bash scripts.
+ *  Create `powerline-builder` module.
+ *  Create `powerline-progress` module.
+ *  Create `powerline-plugin` webpack plugin.
+ *  Allow to pass function, which takes build time as an argument,
+    as `title` to `webpack-notifier`.
+ *  Add `LICENSE.md`.
