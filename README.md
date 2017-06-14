@@ -45,3 +45,4 @@
  *  Allow to pass function, which takes build time as an argument,
     as `title` to `webpack-notifier`.
  *  Add `LICENSE.md`.
+ *  Fix prompt to update window title in shell.
