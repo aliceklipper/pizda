@@ -61,6 +61,7 @@ module.exports = {
         'fp',
         'security',
         'unicorn',
+        'flowtype-errors',
     ],
     rules: {
         'no-cond-assign': ERROR,
@@ -278,6 +279,8 @@ module.exports = {
         'unicorn/prefer-starts-ends-with': ERROR,
         'unicorn/prefer-type-error': ERROR,
         'unicorn/custom-error-definition': ERROR,
+
+        'flowtype-errors/show-errors': ERROR,
 
         'new-cap': OFF,
         'babel/new-cap': ERROR,

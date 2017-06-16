@@ -1,3 +1,7 @@
+/**
+ * @flow
+ */
+
 /*
  eslint
  import/export: off

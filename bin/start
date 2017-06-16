@@ -7,13 +7,9 @@ export PORT=1337
 export PUBLIC_PATH=''
 export HOST='localhost'
 
-export NODE_OPTIONS="--no-deprecation"
-
 webpack-dashboard \
     --port "$[PORT + 1]" \
     --title "RocketBroom » WDS « ${NODE_ENV}" \
     --color blue \
     -- \
-    node \
-    --harmony \
-    `which webpack-dev-server`
+    webpack-dev-server

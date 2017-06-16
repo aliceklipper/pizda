@@ -1,9 +1,13 @@
 [ignore]
-# <PROJECT_ROOT>/node_modules/.*
-# <PROJECT_ROOT>/build/.*
-# <PROJECT_ROOT>/webpack\.config\.js
-# <PROJECT_ROOT>/\.eslintrc\.js
-# <PROJECT_ROOT>/\.stylelint\.js
+<PROJECT_ROOT>/node_modules/styled-components/.*
+<PROJECT_ROOT>/node_modules/stylelint/.*
+<PROJECT_ROOT>/node_modules/relay-compiler/.*
+<PROJECT_ROOT>/node_modules/babel-plugin-relay/.*
+<PROJECT_ROOT>/node_modules/babel-plugin-flow-runtime/.*
+<PROJECT_ROOT>/build/.*
+<PROJECT_ROOT>/temp/.*
+<PROJECT_ROOT>/var/.*
+<PROJECT_ROOT>/coverage/.*
 
 [include]
 
@@ -12,7 +16,7 @@
 [libs]
 
 [options]
-all=true
-emoji=true
+# all=true
+# emoji=true
 module.name_mapper='^~/\(.*\)$' -> '<PROJECT_ROOT>/src/\1'
 # module.name_mapper.extension='less' -> '<PROJECT_ROOT>/less-stub.js'

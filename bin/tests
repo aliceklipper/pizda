@@ -6,6 +6,4 @@ export NODE_ENV='production'
 export PORT=1337
 export PUBLIC_PATH='/'
 
-echo -en "\033]0;RocketBroom » Jest « ${NODE_ENV}\a"
-
 lint && jest --coverage

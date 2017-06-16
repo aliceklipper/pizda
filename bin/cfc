@@ -2,10 +2,22 @@
 
 # Creates functional component.
 
-INDEX="export * from './${2}';\n\
+INDEX="/**
+ * @flow
+ */
+
+export * from './${2}';\n
 export { default } from './${2}';"
 
-MAIN="function ${2}() {
+MAIN="/**
+ * @file TODO: ${2} stub.
+ * @author Alice Klipper <alice.klipper@yandex.com> (https://vk.com/alice.klipper)
+ * @license MIT
+ * @copyright KlipperSubs, 2017
+ * @flow
+ */
+
+function ${2}() {
     return (
         <div className={'${2}'}>
             {/* TODO: ${2} stub. */}
@@ -21,4 +33,3 @@ echo -e "${INDEX}" > "./src/${1}/${2}/index.jsx"
 echo -e "${MAIN}" > "./src/${1}/${2}/${2}.jsx"
 
 git add "./src/${1}/${2}/*"
-

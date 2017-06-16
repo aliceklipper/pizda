@@ -7,8 +7,4 @@ export PORT=1337
 export PUBLIC_PATH=''
 export HOST='aliceklipper.github.io'
 
-echo -en "\033]0;RocketBroom » webpack « ${NODE_ENV}\a"
-
-export NODE_OPTIONS="--no-deprecation"
-
-node --harmony `which webpack`
+webpack
