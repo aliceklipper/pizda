@@ -12,6 +12,7 @@ export NODE_OPTIONS="--no-deprecation"
 webpack-dashboard \
     --port "$[PORT + 1]" \
     --title "RocketBroom » WDS « ${NODE_ENV}" \
+    --color blue \
     -- \
     node \
     --harmony \
