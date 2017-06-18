@@ -8,3 +8,4 @@ export PUBLIC_PATH=''
 export HOST='aliceklipper.github.io'
 
 webpack
+eslint --config ".eslintrc.production.js" "./build/**/*.js"

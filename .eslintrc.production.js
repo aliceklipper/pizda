@@ -6,9 +6,11 @@
  fp/no-mutation: off
  */
 
+const [ERROR] = ['error'];
+
 module.exports = {
-    extends: 'stylelint-config-standard',
+    plugins: ['compat'],
     rules: {
-        indentation: 4,
+        'compat/compat': ERROR,
     },
 };

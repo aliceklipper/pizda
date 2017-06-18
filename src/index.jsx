@@ -8,8 +8,21 @@
 
 import ReactDOM from 'react-dom';
 
+import { injectGlobal } from 'styled-components';
+
 import App from './components/App';
 
 (async () => {
-    ReactDOM.render(<App pizda={() => 'The Zhopa.'} />, document.querySelector('#mount'));
+    injectGlobal`
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+            font-family: 'PT Sans', sans-serif;
+            line-height: 20px;
+            font-size: 13px;
+        }
+    `;
+
+    ReactDOM.render(<App pizda={() => 'The Pizda.'} />, document.querySelector('#mount'));
 })();

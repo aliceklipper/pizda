@@ -1,5 +1,5 @@
 /**
- * @file RocketBroom webpack 2 config.
+ * @file RocketBroom webpack 2 (3) config.
  * @author Alice Klipper <alice.klipper@yandex.com> (https://vk.com/alice.klipper)
  * @license MIT
  * @copyright KlipperSubs, 2017
@@ -33,41 +33,42 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const NotifierPlugin = require('webpack-notifier');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 
-/* Import other helpers */
-const { dev } = require('alice-helpers');
-
 /* Define shortcuts for some webpack plugins */
 const { EnvironmentPlugin, NamedModulesPlugin, NoEmitOnErrorsPlugin } = webpack;
+
+/* Preparing */
+const dev = !process.env.NODE_ENV || process.env.NODE_ENV.startsWith('dev');
+// const prod = (process.env.NODE_ENV && process.env.NODE_ENV.startsWith('prod')) || false;
 
 /*
  * Config options
  */
 
 /* Target configuration */
-const target = () => 'web';
+const target = 'web';
 
 /* Context configuration */
-const context = () => process.cwd();
+const context = process.cwd();
 
 /* Entry point configuration */
-const entry = () => ({
+const entry = {
     index: ['babel-polyfill', './src/index.jsx'],
-});
+};
 
 /* Output configuration */
-const output = () => ({
+const output = {
     chunkFilename: '[id].js',
     filename: '[name].js',
     path: join(process.cwd(), 'build'),
-    pathinfo: dev(),
+    pathinfo: dev,
     publicPath: process.env.PUBLIC_PATH,
-});
+};
 
 /* Source maps configuration */
-const devtool = () => (dev() ? 'source-map' : undefined);
+const devtool = dev ? 'source-map' : undefined;
 
 /* Development server configuration */
-const devServer = () => ({
+const devServer = {
     compress: false,
     port: process.env.PORT,
     host: process.env.HOST,
@@ -76,93 +77,87 @@ const devServer = () => ({
     contentBase: join(process.cwd(), 'build'),
     watchContentBase: true,
     hot: false,
-    // open: dev(),
-});
+    // open: dev,
+};
 
 /* Watch configuration */
-const watch = () => false;
+const watch = false;
 
 /* Node-like environment configuration */
-const node = () => ({
+const node = {
     __filename: true,
     __dirname: true,
     global: true,
     process: true,
     Buffer: true,
     setImmediate: true,
-});
+};
 
 /* Resolving configurations */
-const resolve = () => ({
+const resolve = {
     extensions: ['.jsx', '.js', '.json'],
     alias: {
         '~': join(process.cwd(), 'src'),
     },
-});
+};
 
 /*
  * Plugins
  */
 
-const envPlugin = () => {
-    return new EnvironmentPlugin({
-        NODE_ENV: 'development',
-        PORT: 1337,
-        HOST: 'localhost',
-    });
-};
+const env = new EnvironmentPlugin({
+    NODE_ENV: 'development',
+    PORT: 1337,
+    HOST: 'localhost',
+});
 
-const htmlPlugin = () => {
-    return new HtmlWebpackPlugin({
-        inject: false,
-        template: '!pug-loader!./index.pug',
-        title: 'Pizda',
-        appMountId: 'mount',
-        mobile: true,
-    });
-};
+const html = new HtmlWebpackPlugin({
+    inject: false,
+    template: '!pug-loader!./index.pug',
+    title: 'Pizda',
+    appMountId: 'mount',
+    mobile: true,
+});
 
-const namedPlugin = () => (dev() ? new NamedModulesPlugin() : null);
+const named = dev ? new NamedModulesPlugin() : null;
 
-const errorsPlugin = () => (dev() ? new NoEmitOnErrorsPlugin() : null);
+const errors = dev ? new NoEmitOnErrorsPlugin() : null;
 
-const babiliPlugin = () => (dev() ? null : new BabiliPlugin());
+const babili = dev ? null : new BabiliPlugin();
 
-const compressionPlugin = () => (dev() ? null : new CompressionPlugin());
+const compression = dev ? null : new CompressionPlugin();
 
-const analyzerPlugin = () =>
-    new BundleAnalyzerPlugin({
-        analyzerMode: 'static',
-        defaultSizes: dev() ? 'stat' : 'gzip',
-        openAnalyzer: false,
-        logLevel: 'silent',
-    });
+const analyzer = new BundleAnalyzerPlugin({
+    analyzerMode: 'static',
+    defaultSizes: dev ? 'stat' : 'gzip',
+    openAnalyzer: false,
+    logLevel: 'silent',
+});
 
-const notifierPlugin = () =>
-    new NotifierPlugin({
-        alwaysNotify: true,
-        title: 'webpack',
-    });
+const notifier = new NotifierPlugin({
+    alwaysNotify: true,
+    title: 'webpack',
+});
 
-const dashboardPlugin = () => new DashboardPlugin({ port: parseInt(process.env.PORT) + 1 });
+const dashboard = dev ? new DashboardPlugin({ port: parseInt(process.env.PORT) + 1 }) : null;
 
 /*
  * Rules
  */
 
-const jsonRule = () => ({
+const json = {
     test: /\.json$/,
     exclude: /node_modules/,
     use: [{ loader: 'json-loader' }],
-});
+};
 
-const fileRule = () => ({
+const file = {
     test: /\.(?:png|jpe?g|gif|svg|ttf|woff|woff2|eot)$/,
     exclude: /node_modules/,
     use: [{ loader: 'file-loader' }],
-});
+};
 
-const jsRule = () => ({
+const js = {
     test: /\.jsx?$/,
     exclude: /node_modules/,
     use: [
@@ -178,7 +173,7 @@ const jsRule = () => ({
             },
         },
     ].filter(Boolean),
-});
+};
 
 /*
  * Generate and export config
@@ -186,26 +181,16 @@ const jsRule = () => ({
 
 module.exports = [
     {
-        target: target(),
-        context: context(),
-        entry: entry(),
-        output: output(),
-        devtool: devtool(),
-        devServer: devServer(),
-        watch: watch(),
-        node: node(),
-        resolve: resolve(),
-        plugins: [
-            envPlugin(),
-            htmlPlugin(),
-            namedPlugin(),
-            errorsPlugin(),
-            babiliPlugin(),
-            compressionPlugin(),
-            analyzerPlugin(),
-            notifierPlugin(),
-            dashboardPlugin(),
-        ].filter(Boolean),
-        module: { rules: [jsonRule(), fileRule(), jsRule()] },
+        target,
+        context,
+        entry,
+        output,
+        devtool,
+        devServer,
+        watch,
+        node,
+        resolve,
+        plugins: [env, html, named, errors, babili, compression, analyzer, notifier, dashboard].filter(Boolean),
+        module: { rules: [json, file, js] },
     },
 ].filter(Boolean);

@@ -6,8 +6,6 @@
  fp/no-mutation: off
  */
 
-const { resolve } = require('path');
-
 const [ERROR, OFF] = ['error', 'off'];
 
 module.exports = {
@@ -98,7 +96,7 @@ module.exports = {
         'no-magic-numbers': [
             ERROR,
             {
-                ignore: [1],
+                ignore: [0, 1],
                 enforceConst: true,
                 detectObjects: true,
             },
@@ -316,7 +314,7 @@ module.exports = {
     settings: {
         'import/resolver': {
             webpack: {
-                config: resolve(__dirname, 'webpack.config.js'),
+                config: 'webpack.config.js',
                 'config-index': 0,
             },
         },

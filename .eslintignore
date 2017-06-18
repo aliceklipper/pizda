@@ -7,4 +7,5 @@ coverage/
 temp/
 flow-typed/
 !.eslintrc.js
+!.eslintrc.production.js
 !.stylelintrc.js

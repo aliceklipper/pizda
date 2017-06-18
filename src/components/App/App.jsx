@@ -10,18 +10,23 @@ import styled from 'styled-components';
 
 import govno from '~/govno';
 
-const Div = styled.div`
+const BlueGovno = styled.div`
+    color: #0080ff;
+`;
+
+const RedPizda = styled.div`
     color: #ff8000;
 `;
 
-function App({ pizda }: { pizda(): string }) {
+export default function App({ pizda }: { pizda(): string }) {
     return (
-        <Div className={'App'}>
-            {govno()}
-            <br />
-            {pizda()}
-        </Div>
+        <div>
+            <BlueGovno>
+                {govno()}
+            </BlueGovno>
+            <RedPizda>
+                {pizda()}
+            </RedPizda>
+        </div>
     );
 }
-
-export default App;

@@ -17,7 +17,8 @@
         "idx",
         "ramda",
         "relay",
-        "react-require"
+        "react-require",
+        "styled-components"
     ],
     "env": {
         "production": {
