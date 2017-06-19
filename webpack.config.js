@@ -16,7 +16,9 @@
  import/max-dependencies: off,
  security/detect-object-injection: off,
  fp/no-let: off,
- no-param-reassign: off
+ no-param-reassign: off,
+ security/detect-non-literal-fs-filename: off,
+ promise/prefer-await-to-callbacks: off,
  */
 
 /* Import builtin modules */
@@ -32,6 +34,8 @@ const BabiliPlugin = require('babili-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const NotifierPlugin = require('webpack-notifier');
 const DashboardPlugin = require('webpack-dashboard/plugin');
+
+const BuildPlugin = require('@aliceklipper/build-number-plugin');
 
 /* Define shortcuts for some webpack plugins */
 const { EnvironmentPlugin, NamedModulesPlugin, NoEmitOnErrorsPlugin } = webpack;
@@ -53,6 +57,10 @@ const context = process.cwd();
 /* Entry point configuration */
 const entry = {
     index: ['babel-polyfill', './src/index.jsx'],
+};
+
+const externals = {
+    version: '__VERSION__',
 };
 
 /* Output configuration */
@@ -98,6 +106,8 @@ const resolve = {
     extensions: ['.jsx', '.js', '.json'],
     alias: {
         '~': join(process.cwd(), 'src'),
+        types: join(process.cwd(), 'src', 'types'),
+        cc: join(process.cwd(), 'src', 'const', 'cc.js'),
     },
 };
 
@@ -117,6 +127,7 @@ const html = new HtmlWebpackPlugin({
     title: 'Pizda',
     appMountId: 'mount',
     mobile: true,
+    version: 'version.js',
 });
 
 const named = dev ? new NamedModulesPlugin() : null;
@@ -139,7 +150,9 @@ const notifier = new NotifierPlugin({
     title: 'webpack',
 });
 
-const dashboard = dev ? new DashboardPlugin({ port: parseInt(process.env.PORT) + 1 }) : null;
+const dashboard = dev ? new DashboardPlugin({ port: parseInt(process.env.DASHBOARD) }) : null;
+
+const build = new BuildPlugin();
 
 /*
  * Rules
@@ -185,12 +198,13 @@ module.exports = [
         context,
         entry,
         output,
+        externals,
         devtool,
         devServer,
         watch,
         node,
         resolve,
-        plugins: [env, html, named, errors, babili, compression, analyzer, notifier, dashboard].filter(Boolean),
+        plugins: [env, html, named, errors, babili, compression, analyzer, notifier, dashboard, build].filter(Boolean),
         module: { rules: [json, file, js] },
     },
 ].filter(Boolean);

@@ -3,7 +3,7 @@
  no-magic-numbers: off,
  import/no-commonjs: off,
  import/unambiguous: off,
- fp/no-mutation: off
+ fp/no-mutation: off,
  */
 
 const [ERROR, OFF] = ['error', 'off'];
@@ -31,6 +31,8 @@ module.exports = {
     },
     globals: {
         _: true,
+        VERSION: true,
+        BUILD_RANDOM: true,
     },
     extends: [
         'eslint:recommended',
@@ -49,7 +51,6 @@ module.exports = {
         'flowtype',
         'react',
         'prettier',
-        'graphql',
         'babel',
         'jsx-a11y',
         'import',
@@ -113,7 +114,7 @@ module.exports = {
 
         'no-catch-shadow': ERROR,
         'no-shadow-restricted-names': ERROR,
-        'no-shadow': ERROR,
+        // 'no-shadow': ERROR,
         'no-unused-vars': [
             ERROR,
             {
@@ -218,7 +219,7 @@ module.exports = {
         'import/no-amd': ERROR,
         'import/first': ERROR,
         'import/no-duplicates': ERROR,
-        'import/no-namespace': ERROR,
+        // 'import/no-namespace': ERROR,
         'import/order': [
             ERROR,
             {
@@ -266,7 +267,7 @@ module.exports = {
         'promise/prefer-await-to-callbacks': ERROR,
 
         'filenames/match-exported': [ERROR, ['kebab', 'camel', 'pascal']],
-        'filenames/match-regex': [ERROR, '^[a-z\\-.]+$', true],
+        'filenames/match-regex': [ERROR, '^[A-Za-z\\-.]+$', true],
 
         'unicorn/no-process-exit': ERROR,
         'unicorn/number-literal-case': ERROR,
@@ -301,13 +302,6 @@ module.exports = {
             },
         ],
 
-        // 'graphql/template-strings': [
-        //     ERROR,
-        //     {
-        //         env: 'relay',
-        //         schemaJson: require('./schema.json'),
-        //     }],
-
         'require-jsdoc': OFF,
         'no-unused-labels': OFF,
     },
@@ -319,5 +313,6 @@ module.exports = {
             },
         },
         'import/extensions': ['.js', '.jsx', '.json'],
+        'import/core-modules': ['version', 'cc', 'types'],
     },
 };

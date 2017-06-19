@@ -2,13 +2,6 @@
 
 # Creates functional component.
 
-INDEX="/**
- * @flow
- */
-
-export * from './${2}';\n
-export { default } from './${2}';"
-
 MAIN="/**
  * @file TODO: ${2} stub.
  * @author Alice Klipper <alice.klipper@yandex.com> (https://vk.com/alice.klipper)
@@ -17,19 +10,14 @@ MAIN="/**
  * @flow
  */
 
-function ${2}() {
-    return (
-        <div className={'${2}'}>
-            {/* TODO: ${2} stub. */}
-        </div>
-    );
-}
+import styled from 'styled-components';
 
-export default ${2};"
+export default styled.div\`
+    // TODO: ${2} stub.
+\`;"
 
-mkdir -p "./src/${1}/${2}/"
+mkdir -p "./src/${1}/"
 
-echo -e "${INDEX}" > "./src/${1}/${2}/index.jsx"
-echo -e "${MAIN}" > "./src/${1}/${2}/${2}.jsx"
+echo -e "${MAIN}" > "./src/${1}/${2}.jsx"
 
-git add "./src/${1}/${2}/*"
+git add "./src/${1}/${2}.jsx"

@@ -7,5 +7,5 @@
  * @return {string}
  */
 export default function govno() {
-    return 'The Govno.';
+    return 'You are the govno ';
 }

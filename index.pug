@@ -4,6 +4,8 @@
 - htmlWebpackPlugin.options.meta        = normalize(htmlWebpackPlugin.options.meta);
 - scripts                               = normalize(htmlWebpackPlugin.options.scripts);
 
+- const join = require('path').join;
+
 //- const util = require('util');
 //- util.inspect.defaultOptions.depth = 7
 //- console.log(htmlWebpackPlugin);
@@ -25,7 +27,7 @@ html(lang= 'en', manifest= htmlWebpackPlugin.files.manifest ? htmlWebpackPlugin.
 
         if htmlWebpackPlugin.files.favicon
             //- TODO: Replace this shit with something that works in all cases.
-            link(rel='shortcut icon', href= '/build/' + htmlWebpackPlugin.files.favicon)/
+            link(rel='shortcut icon', href= join(htmlWebpackPlugin.files.publicPath, htmlWebpackPlugin.files.favicon))/
 
         if htmlWebpackPlugin.options.mobile
             meta(name= 'viewport', content= 'width=device-width, initial-scale=1')/
@@ -56,8 +58,11 @@ html(lang= 'en', manifest= htmlWebpackPlugin.files.manifest ? htmlWebpackPlugin.
         each index in htmlWebpackPlugin.options.appMountIds
             div(id= htmlWebpackPlugin.options.appMountIds[index], class= 'mount_id_' + htmlWebpackPlugin.options.appMountIds[index])
 
+        if htmlWebpackPlugin.options.version
+            script(type= 'text/javascript', src= join(htmlWebpackPlugin.files.publicPath, htmlWebpackPlugin.options.version))
+
         if htmlWebpackPlugin.options.window
-            script
+            script(type= 'text/javascript')
                 each key in Object.keys(htmlWebpackPlugin.options.window)
                     | window['#{key}'] = !{JSON.stringify(htmlWebpackPlugin.options.window[key])};
 
@@ -71,9 +76,6 @@ html(lang= 'en', manifest= htmlWebpackPlugin.files.manifest ? htmlWebpackPlugin.
             each item in htmlWebpackPlugin.options.scripts
                 - if (typeof item === 'string' || item instanceof String) { item = { src: item }; }
                 script(type= 'text/javascript', async= '', defer= '')&attributes(item)
-
-        if htmlWebpackPlugin.options.devServer
-            script(type= 'text/javascript', src= htmlWebpackPlugin.options.devServer + '/webpack-dev-server.js')
 
         if htmlWebpackPlugin.options.googleAnalytics && htmlWebpackPlugin.options.googleAnalytics.trackingId
             script

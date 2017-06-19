@@ -5,4 +5,4 @@
 # FIXME: OH, NO, `stylelint --fix` on JS files breaks all.
 # TODO: Definitely, we need `eslint-stylelint-plugin`. Also, with it stylelint for styled-components may be seamlessly integrated into IDEA.
 
-eslint --fix "." "./src/**/*.{js,jsx}" && stylelint "./src/**/*.{js,jsx}"
+eslint --fix "." "./src/**/*.{js,jsx}"

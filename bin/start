@@ -4,12 +4,11 @@
 
 export NODE_ENV='development'
 export PORT=1337
-export PUBLIC_PATH=''
+export DASHBOARD=1984
+export PUBLIC_PATH='/'
 export HOST='localhost'
 
 webpack-dashboard \
-    --port "$[PORT + 1]" \
-    --title "RocketBroom » WDS « ${NODE_ENV}" \
-    --color blue \
+    --port "${DASHBOARD}" \
     -- \
     webpack-dev-server

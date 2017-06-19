@@ -3,7 +3,10 @@
         [
             "env",
             {
-                "useBuiltIns": true
+                "useBuiltIns": true,
+                "targets": [
+                    "chrome >= 59"
+                ]
             }
         ],
         "react-optimize",
@@ -16,14 +19,36 @@
         "partial-application",
         "idx",
         "ramda",
-        "relay",
         "react-require",
-        "styled-components"
+        [
+            "styled-components",
+            {
+                "preprocess": true
+            }
+        ]
     ],
     "env": {
         "production": {
+            "presets": [
+                [
+                    "env",
+                    {
+                        "useBuiltIns": true,
+                        "targets": [
+                            "last 2 versions"
+                        ]
+                    }
+                ]
+            ],
             "plugins": [
-                "groundskeeper-willie"
+                [
+                    "groundskeeper-willie",
+                    {
+                        "removeConsole": true,
+                        "removeDebugger": true,
+                        "removePragma": false
+                    }
+                ]
             ]
         }
     }

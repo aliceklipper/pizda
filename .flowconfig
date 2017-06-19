@@ -9,14 +9,10 @@
 <PROJECT_ROOT>/var/.*
 <PROJECT_ROOT>/coverage/.*
 
-[include]
-
-#
-
 [libs]
 
 [options]
-# all=true
-# emoji=true
 module.name_mapper='^~/\(.*\)$' -> '<PROJECT_ROOT>/src/\1'
-# module.name_mapper.extension='less' -> '<PROJECT_ROOT>/less-stub.js'
+module.name_mapper='^types/\(.*\)$' -> '<PROJECT_ROOT>/src/types/\1'
+module.name_mapper='^cc$' -> '<PROJECT_ROOT>/src/const/cc.js'
+module.name_mapper='^version$' -> '<PROJECT_ROOT>/version.mock.js'
