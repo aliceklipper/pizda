@@ -20,12 +20,7 @@
         "idx",
         "ramda",
         "react-require",
-        [
-            "styled-components",
-            {
-                "preprocess": true
-            }
-        ]
+        "styled-components"
     ],
     "env": {
         "production": {

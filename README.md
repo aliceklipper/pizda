@@ -21,3 +21,5 @@
  *  Design color palette.
  *  Support JSDoc.
  *  Port mpv to WASM?
+ *  Report bugs to `babel-plugin-5to6-commonjs-to-import`,
+    maybe fix them, and re-enable this plugin.
