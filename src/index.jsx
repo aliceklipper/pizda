@@ -40,7 +40,7 @@ import store from './store';
 
     render(
         <Provider store={store}>
-            <App pizda={() => `The Pizda v${version.version}.${version.build}.`} />
+            <App pizda={() => `The Pizda v${version.version}+${version.build}.`} />
         </Provider>,
         document.querySelector('#mount'),
     );
