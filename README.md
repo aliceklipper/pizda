@@ -20,8 +20,4 @@
  *  Add `LICENSE.md`.
  *  Design color palette.
  *  Support JSDoc.
- *  Add `ModuleConcatenationPlugin`.
- *  Learn other optimization plugins.
- *  Add `cache-loader`.
- *  Learn about code splitting from [here](https://webpack.js.org/guides/code-splitting-async/).
  *  Port mpv to WASM?

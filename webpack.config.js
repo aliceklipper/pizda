@@ -38,7 +38,7 @@ const DashboardPlugin = require('webpack-dashboard/plugin');
 const BuildPlugin = require('@aliceklipper/build-number-plugin');
 
 /* Define shortcuts for some webpack plugins */
-const { EnvironmentPlugin, NamedModulesPlugin, NoEmitOnErrorsPlugin } = webpack;
+const { EnvironmentPlugin, NamedModulesPlugin, NoEmitOnErrorsPlugin, optimize: { ModuleConcatenationPlugin } } = webpack;
 
 /* Preparing */
 const dev = !process.env.NODE_ENV || process.env.NODE_ENV.startsWith('dev');
@@ -109,6 +109,7 @@ const resolve = {
         types: join(process.cwd(), 'src', 'types'),
         cc: join(process.cwd(), 'src', 'const', 'cc.js'),
     },
+    mainFields: ['module', 'jsnext:main', 'browser', 'main'],
 };
 
 /*
@@ -154,6 +155,8 @@ const dashboard = dev ? new DashboardPlugin({ port: parseInt(process.env.DASHBOA
 
 const build = new BuildPlugin();
 
+const concatenation = new ModuleConcatenationPlugin();
+
 /*
  * Rules
  */
@@ -174,6 +177,12 @@ const js = {
     test: /\.jsx?$/,
     exclude: /node_modules/,
     use: [
+        {
+            loader: 'cache-loader',
+            options: {
+                cacheDirectory: join(process.cwd(), 'cache'),
+            },
+        },
         {
             loader: 'babel-loader',
             options: { cacheDirectory: true },
@@ -204,7 +213,7 @@ module.exports = [
         watch,
         node,
         resolve,
-        plugins: [env, html, named, errors, babili, compression, analyzer, notifier, dashboard, build].filter(Boolean),
+        plugins: [env, html, named, errors, babili, compression, analyzer, notifier, dashboard, build, concatenation].filter(Boolean),
         module: { rules: [json, file, js] },
     },
 ].filter(Boolean);
