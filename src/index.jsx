@@ -7,15 +7,16 @@
  */
 
 import version from 'version';
-import * as cc from 'cc';
+
+import { render } from 'react-dom';
 
 import { Provider } from 'react-redux';
-import { render } from 'react-dom';
 import { injectGlobal } from 'styled-components';
 
-import App from './components/App';
-
 import store from './store';
+
+import * as cc from 'const/cc';
+import App from 'components/App';
 
 (async () => {
     injectGlobal`

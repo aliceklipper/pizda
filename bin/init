@@ -6,3 +6,4 @@ mkdir -p build
 mkdir -p temp
 mkdir -p var
 mkdir -p coverage
+mkdir -p cache

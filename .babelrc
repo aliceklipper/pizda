@@ -4,9 +4,12 @@
             "env",
             {
                 "useBuiltIns": true,
-                "targets": [
-                    "chrome >= 59"
-                ]
+                "targets": {
+                    "browsers": [
+                        "chrome >= 59"
+                    ]
+                },
+                "modules": false
             }
         ],
         "react-optimize",
@@ -16,7 +19,12 @@
     "plugins": [
         "trace",
         "flow-runtime",
-        "partial-application",
+        [
+            "partial-application",
+            {
+                "placeholder": "$"
+            }
+        ],
         "idx",
         "ramda",
         "react-require",
@@ -29,9 +37,13 @@
                     "env",
                     {
                         "useBuiltIns": true,
-                        "targets": [
-                            "last 2 versions"
-                        ]
+                        "targets": {
+                            "browsers": [
+                                "last 2 versions"
+                            ],
+                            "uglify": true
+                        },
+                        "modules": false
                     }
                 ]
             ],

@@ -313,6 +313,6 @@ module.exports = {
             },
         },
         'import/extensions': ['.js', '.jsx', '.json'],
-        'import/core-modules': ['version', 'cc', 'types'],
+        'import/core-modules': ['version', 'const', 'types', 'components', 'containers', 'api'],
     },
 };

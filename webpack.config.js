@@ -99,6 +99,10 @@ const node = {
     process: true,
     Buffer: true,
     setImmediate: true,
+    punycode: false,
+    url: false,
+    querystring: false,
+    util: false,
 };
 
 /* Resolving configurations */
@@ -107,7 +111,10 @@ const resolve = {
     alias: {
         '~': join(process.cwd(), 'src'),
         types: join(process.cwd(), 'src', 'types'),
-        cc: join(process.cwd(), 'src', 'const', 'cc.js'),
+        const: join(process.cwd(), 'src', 'const'),
+        components: join(process.cwd(), 'src', 'components'),
+        containers: join(process.cwd(), 'src', 'containers'),
+        api: join(process.cwd(), 'src', 'api'),
     },
     mainFields: ['module', 'jsnext:main', 'browser', 'main'],
 };
@@ -175,7 +182,7 @@ const file = {
 
 const js = {
     test: /\.jsx?$/,
-    exclude: /node_modules/,
+    exclude: /node_modules\/(?:styled-components|react-redux)\//,
     use: [
         {
             loader: 'cache-loader',
@@ -213,7 +220,7 @@ module.exports = [
         watch,
         node,
         resolve,
-        plugins: [env, html, named, errors, babili, compression, analyzer, notifier, dashboard, build, concatenation].filter(Boolean),
+        plugins: [env, html, named, errors, concatenation, babili, compression, analyzer, notifier, dashboard, build].filter(Boolean),
         module: { rules: [json, file, js] },
     },
 ].filter(Boolean);

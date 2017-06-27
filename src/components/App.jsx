@@ -6,32 +6,21 @@
  * @flow
  */
 
-import govno from '~/govno';
+import t from 'flow-runtime';
 
-import Message from './Message';
+import Message from 'components/Message';
 
-import CounterDisplay from '../containers/CounterDisplay';
-import IncrementCounter from '../containers/IncrementCounter';
-import DecrementCounter from '../containers/DecrementCounter';
+const fib = t.pattern(
+    (x: 0) => 0,
+    (x: 1) => 1,
+    (x: number) => fib(x - 1) + fib(x - 2), // eslint-disable-line no-magic-numbers
+);
 
-export default function App({ pizda }: { pizda(): string }) {
+export default function App() {
     return (
         <div>
-            <Message>
-                {govno()}
-                <DecrementCounter>-</DecrementCounter>
-                <CounterDisplay />
-                <IncrementCounter>+</IncrementCounter>
-                {' times.'}
-            </Message>
-            <Message level="success">
-                {pizda()}
-            </Message>
-            <Message level="warning">
-                {pizda()}
-            </Message>
             <Message level="error">
-                {pizda()}
+                Ti pidor.
             </Message>
         </div>
     );
