@@ -19,12 +19,7 @@
     "plugins": [
         "trace",
         "flow-runtime",
-        [
-            "partial-application",
-            {
-                "placeholder": "$"
-            }
-        ],
+        "partial-application",
         "idx",
         "ramda",
         "react-require",

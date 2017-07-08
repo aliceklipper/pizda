@@ -1,5 +1,5 @@
 /**
- * @file RocketBroom webpack 2 (3) config.
+ * @file RocketBroom webpack 3 config.
  * @author Alice Klipper <alice.klipper@yandex.com> (https://vk.com/alice.klipper)
  * @license MIT
  * @copyright KlipperSubs, 2017
@@ -33,7 +33,6 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const BabiliPlugin = require('babili-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const NotifierPlugin = require('webpack-notifier');
-const DashboardPlugin = require('webpack-dashboard/plugin');
 
 const BuildPlugin = require('@aliceklipper/build-number-plugin');
 
@@ -89,7 +88,7 @@ const devServer = {
 };
 
 /* Watch configuration */
-const watch = false;
+const watch = dev;
 
 /* Node-like environment configuration */
 const node = {
@@ -158,8 +157,6 @@ const notifier = new NotifierPlugin({
     title: 'webpack',
 });
 
-const dashboard = dev ? new DashboardPlugin({ port: parseInt(process.env.DASHBOARD) }) : null;
-
 const build = new BuildPlugin();
 
 const concatenation = new ModuleConcatenationPlugin();
@@ -182,14 +179,14 @@ const file = {
 
 const js = {
     test: /\.jsx?$/,
-    exclude: /node_modules\/(?:styled-components|react-redux)\//,
+    exclude: /node_modules\/(?:styled-components|react-redux|core-js|react-dom)\//,
     use: [
-        {
-            loader: 'cache-loader',
-            options: {
-                cacheDirectory: join(process.cwd(), 'cache'),
-            },
-        },
+        // {
+        //     loader: 'cache-loader',
+        //     options: {
+        //         cacheDirectory: join(process.cwd(), 'cache'),
+        //     },
+        // },
         {
             loader: 'babel-loader',
             options: { cacheDirectory: true },
@@ -220,7 +217,7 @@ module.exports = [
         watch,
         node,
         resolve,
-        plugins: [env, html, named, errors, concatenation, babili, compression, analyzer, notifier, dashboard, build].filter(Boolean),
+        plugins: [env, html, named, errors, concatenation, babili, compression, analyzer, notifier, build].filter(Boolean),
         module: { rules: [json, file, js] },
     },
 ].filter(Boolean);

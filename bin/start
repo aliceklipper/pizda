@@ -4,11 +4,7 @@
 
 export NODE_ENV='development'
 export PORT=1337
-export DASHBOARD=1984
 export PUBLIC_PATH='/'
 export HOST='localhost'
 
-webpack-dashboard \
-    --port "${DASHBOARD}" \
-    -- \
-    webpack-dev-server
+webpack
